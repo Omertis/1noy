@@ -293,7 +293,7 @@ client.on('message', message => {
 })
 
 client.on('ready', () => {
-     client.user.setActivity("Faster",{type: 'LISTENING'});
+     client.user.setActivity("f9play",{type: 'LISTENING'});
 
 });
 
