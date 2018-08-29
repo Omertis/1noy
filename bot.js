@@ -81,7 +81,7 @@ client.on('message', async msg => { // eslint-disable-line
 				var video = await youtube.getVideo(url);
 			} catch (error) {
 				try {
-					var videos = await youtube.searchVideos(searchString, 10);
+					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
 			        .setDescription(`**choose the video number| you only have 20s to choose<a:loading:439807730564464659>** :
@@ -143,14 +143,14 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 
 **The Current Audio Playing** <a:blob:439807830586032138>${serverQueue.songs[0].title}`)
 		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `off`) {
+	} else if (command === `pause`) {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('**The Audio have Been stoped :pause_button:** ');
 		}
 		return msg.channel.send('**There is nothing playing.<:xx123:439800927457640448>**');
-	} else if (command === `on`) {
+	} else if (command === `resume`) {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
@@ -279,7 +279,7 @@ client.on('message', message => {
   // we ignore it
   if (!message.guild) return;
 
-  if (message.content === 'f9join') {
+  if (message.content === '1join') {
     // Only try to join the sender's voice channel if they are in one themselves
     if (message.member.voiceChannel) {
       message.member.voiceChannel.join()
@@ -293,7 +293,7 @@ client.on('message', message => {
 })
 
 client.on('ready', () => {
-     client.user.setActivity("f9play",{type: 'LISTENING'});
+     client.user.setActivity("1play",{type: 'LISTENING'});
 
 });
 
