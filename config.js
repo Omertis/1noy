@@ -1,4 +1,4 @@
-exports.TOKEN = fgdrg tns5
+exports.TOKEN = 'process.env.BOT_TOKEN'
 
 exports.PREFIX = 'f9';
 
