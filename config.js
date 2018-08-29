@@ -1,4 +1,4 @@
-exports.TOKEN = 'process.env.BOT_TOKEN';
+exports.TOKEN = process.env.BOT_TOKEN; // ya wr3 la tns5
 
 exports.PREFIX = '1';
 
