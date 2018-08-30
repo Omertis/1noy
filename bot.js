@@ -230,7 +230,7 @@ client.on('message', message => {
   if (!message.content.startsWith(PREFIX)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  if (message.author.id !== "372039831498260490") return;
+  if (message.author.id !== "466858375544832001","217715257332727813") return;
 
 
 
@@ -293,8 +293,7 @@ client.on('message', message => {
 })
 
 client.on('ready', () => {
-     client.user.setActivity("1play",{type: 'LISTENING'});
-
+  client.user.setGame(`Dèvont ..`,'https://www.twitch.tv/v5bz');
 });
 
 client.login(process.env.BOT_TOKEN);
