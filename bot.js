@@ -81,7 +81,7 @@ client.on('message', async msg => { // eslint-disable-line
 				var video = await youtube.getVideo(url);
 			} catch (error) {
 				try {
-					var videos = await youtube.searchVideos(searchString, 5);
+					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
 			        .setDescription(`**choose the video number| you only have 20s to choose<a:loading:439807730564464659>** :
@@ -120,7 +120,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('**Stop command has been used!<:checkmark:439800491644289024>**');
 		return undefined;
-	} else if (command === `vol`) {
+	} else if (command === `volume`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!<:xx123:439800927457640448>');
 		if (!serverQueue) return msg.channel.send('**There is nothing playing.<:xx123:439800927457640448>**');
 		if (!args[1]) return msg.channel.send(`:loud_sound: Current volume is **${serverQueue.volume}**`);
@@ -226,44 +226,30 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`Start Playing: **${song.title}**<a:loading:439807730564464659>`);
 }
 
-
-
-
-  const devs = ["217715257332727813", "466858375544832001"];
-const adminprefix = ["1"];
 client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developer.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'ply')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();        
-  } else  
-  if (message.content.startsWith(adminprefix + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'st')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.send(`**✅**`)
-  }
-  if (message.content.startsWith(adminprefix + 'setname')) {
+  if (!message.content.startsWith(PREFIX)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id !== "372039831498260490") return;
+
+
+
+if (message.content.startsWith(PREFIX + 'setstream')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/darkknite55");
+	 console.log('test' + argresult);
+    message.channel.sendMessage(`Streaming: **${argresult}`)
+} 
+
+if (message.content.startsWith(PREFIX + 'setname')) {
   client.user.setUsername(argresult).then
-      message.channel.send(`Changing The Name To ..**${argresult}** `)
-} else
-if (message.content.startsWith(adminprefix + 'setavatar')) {
+	  message.channel.sendMessage(`Username Changed To **${argresult}**`)
+  return message.reply("You Can change the username 2 times per hour");
+} 
+if (message.content.startsWith(PREFIX + 'setavatar')) {
   client.user.setAvatar(argresult);
-    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+   message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
 }
 });
-  
 
 let prefix = '1';
 
@@ -271,16 +257,13 @@ client.on('message', msg => {
 	if (msg.content.startsWith(prefix + 'help')) {
 msg.author.send("Commands Music " + `  **
 
-    "  : الاوامر "
+   "  : الاوامر "
 :headphones:  ${prefix}play |اسم لاغنيه / رابط الاغنية 
 :headphones:  ${prefix}skipللإنتقاال الى الاغنيه التاليه (\اذا كان هناك بقائمة الانتظار\
 :headphones:  ${prefix}stop|لأيقاف الموسيقى  
 :headphones:  ${prefix}volume |لتغير حجم الصوت
 :headphones:  ${prefix}np | لرؤية الموسيقى الشغالة حالياً
-:headphones:  ${prefix}pause |لايقاف الاغنية الحالية مؤقتا
-:headphones:  ${prefix}resume |لاكمال الاغنية الحالية
-:headphones:  ${prefix}join |لتعليق البوت فالروم
-for help = <@466858375544832001> 
+:headphones:  ${prefix}resume |لاعادت تشغيل الاغنية الموجودة
 **`);
  }
 });
@@ -307,7 +290,7 @@ client.on('message', message => {
 })
 
 client.on('ready', () => {
-  client.user.setGame(`Dèvont ..`,'https://www.twitch.tv/v5bz');
+  client.user.setGame('Dèvont','https://www.twitch.tv/pd13');
 });
 
 client.login(process.env.BOT_TOKEN);
